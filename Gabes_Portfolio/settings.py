@@ -27,8 +27,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+SECURE_SSL_REDIRECT = not DEBUG
 
-ALLOWED_HOSTS = ['gibby-portfolio-67b9eabb7b43.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['www.24gibby.com', '24gibby.com', 'gibby-portfolio-67b9eabb7b43.herokuapp.com', 'localhost']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
