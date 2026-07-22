@@ -1,1 +1,2 @@
-web: gunicorn Gabes_Portfolio.wsgi --log-file -
+release: python manage.py migrate
+web: gunicorn Gabes_Portfolio.wsgi
