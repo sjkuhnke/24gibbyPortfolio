@@ -1,0 +1,1 @@
+web: gunicorn Gabes_Portfolio.wsgi --log-file -
