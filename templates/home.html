@@ -121,9 +121,15 @@
     </p>
   </div>
 
-    <button class="btn-primary">
-        <a href="https://distrokid.com/hyperfollow/24gibby/4-songs-4-summer/" target="_blank" rel="noopener">Presave</a>
-    </button>
+    <div class="presave-card" data-reveal data-reveal="right">
+      <div class="presave-glow"></div>
+      <div class="presave-eyebrow">Debut Album — Out Friday</div>
+      <div class="presave-title">4 Songs 4 Summer</div>
+      <a href="https://distrokid.com/hyperfollow/24gibby/4-songs-4-summer/" target="_blank" rel="noopener" class="presave-btn">
+        <span>Presave</span>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+    </div>
     <!--
   <div class="spotify-embed-wrap" data-reveal data-reveal="right">
     <iframe
@@ -177,14 +183,13 @@
 
   <div class="video-embed-wrap" data-reveal data-reveal="scale">
     <div class="video-embed-frame">
-      <iframe
-        src="https://www.youtube.com/embed/REPLACE_ME"
+      <video
+        src="{% static 'videos/video1.mov' %}"
         title="24gibby video"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
+        controls
+        playsinline
+        preload="metadata">
+      </video>
     </div>
   </div>
 </section>

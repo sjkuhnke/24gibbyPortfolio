@@ -381,6 +381,78 @@ body {
   border-radius: 6px;
 }
 
+.presave-card {
+  position: relative;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+.presave-glow {
+  position: absolute;
+  top: -45%;
+  right: -15%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(138,43,226,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.presave-eyebrow {
+  position: relative;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 14px;
+}
+
+.presave-title {
+  position: relative;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(30px, 3.4vw, 42px);
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  color: var(--fg);
+  margin-bottom: 28px;
+}
+
+.presave-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.presave-btn i {
+  font-size: 11px;
+  transition: transform 0.2s ease;
+}
+
+.presave-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(138,43,226,0.35);
+}
+
+.presave-btn:hover i {
+  transform: translate(2px, -2px);
+}
+
 /* ---- SHOWS PREVIEW ---- */
 .home-shows {
   padding: 0 40px 60px;
@@ -510,6 +582,8 @@ body {
 
 .video-embed-wrap {
   width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 .video-embed-frame {
@@ -519,6 +593,12 @@ body {
   background: var(--bg-2);
   border-radius: 6px;
   overflow: hidden;
+  box-shadow: 0 0 0 1px var(--border);
+  transition: box-shadow 0.3s ease;
+}
+
+.video-embed-frame:hover {
+  box-shadow: 0 0 44px rgba(138,43,226,0.22), 0 0 0 1px var(--border-mid);
 }
 
 .video-embed-frame iframe {
@@ -527,6 +607,15 @@ body {
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+.video-embed-frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--bg-2);
 }
 
 /* ---- ABOUT STRIP ---- */
@@ -876,6 +965,10 @@ body {
   .merch-grid {
     padding: 0 0 60px;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .video-embed-wrap {
+    max-width: none;
   }
 
   .show-city {
