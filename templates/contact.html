@@ -25,10 +25,10 @@
 
       <div class="contact-info-label">Follow</div>
       <div class="contact-socials">
-        <a href="https://www.instagram.com/REPLACE_ME" target="_blank" rel="noopener" class="contact-social-link">
+        <a href="https://www.instagram.com/24gibbyyy" target="_blank" rel="noopener" class="contact-social-link">
           <i class="fab fa-instagram"></i> Instagram
         </a>
-        <a href="https://www.tiktok.com/@REPLACE_ME" target="_blank" rel="noopener" class="contact-social-link">
+        <a href="https://www.tiktok.com/@24gibbyyy" target="_blank" rel="noopener" class="contact-social-link">
           <i class="fab fa-tiktok"></i> TikTok
         </a>
         <a href="https://open.spotify.com/artist/REPLACE_ME" target="_blank" rel="noopener" class="contact-social-link">
@@ -42,46 +42,83 @@
 
     <!-- Right: contact form -->
     <div data-reveal data-reveal="right" data-reveal-delay="120">
-      <!--
-        Wire this form up to a Django view with a POST handler.
-        Don't forget {% csrf_token %}.
-        Optional: add reCAPTCHA like your portfolio site if spam becomes an issue.
-      -->
-      <form class="contact-form" method="post" action="{% url 'contact' %}">
+      <form class="contact-form" method="POST" action="{% url 'contact' %}" data-form>
         {% csrf_token %}
 
         <div class="form-group">
           <label class="form-label" for="name">Name</label>
-          <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required data-form-input>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="email">Email</label>
-          <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required>
+          <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required data-form-input>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="subject">Subject</label>
-          <input class="form-input" type="text" id="subject" name="subject" placeholder="Booking, press, or just saying hi">
+          <input class="form-input" type="text" id="subject" name="subject" placeholder="Booking, press, or just saying hi" data-form-input>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="message">Message</label>
-          <textarea class="form-textarea" id="message" name="message" placeholder="What's on your mind?" required></textarea>
+          <textarea class="form-textarea" id="message" name="message" placeholder="What's on your mind?" required data-form-input></textarea>
         </div>
 
         {% if messages %}
           {% for message in messages %}
-            <p style="font-size:12px; color: {% if message.tags == 'success' %}#1DB954{% else %}#e24b2b{% endif %}; letter-spacing:0.06em;">
+            <div class="form-message {% if message.tags == 'success' %}form-message-success{% else %}form-message-error{% endif %}">
               {{ message }}
-            </p>
+            </div>
           {% endfor %}
         {% endif %}
 
-        <button type="submit" class="form-submit">Send Message</button>
+        <button type="submit" class="form-submit" disabled data-form-btn>Send Message</button>
       </form>
     </div>
 
   </div>
 </div>
+<script>
+    // contact form variables
+    const form = document.querySelector("[data-form]");
+    const formInputs = document.querySelectorAll("[data-form-input]");
+    const formBtn = document.querySelector("[data-form-btn]");
+    
+    // add event to all form input field
+    for (let i = 0; i < formInputs.length; i++) {
+      formInputs[i].addEventListener("input", function () {
+    
+        // check form validation
+        if (form.checkValidity()) {
+          formBtn.removeAttribute("disabled");
+        } else {
+          formBtn.setAttribute("disabled", "");
+        }
+    
+      });
+    }
+    
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // stop the native submit entirely
+      onSubmit();
+    });
+    
+    function onSubmit() {
+      grecaptcha.ready(function () {
+        grecaptcha.execute("{{ recaptcha_site_key }}", { action: 'submit' }).then(function (token) {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "g-recaptcha-response";
+          input.value = token;
+          form.appendChild(input);
+          form.submit();
+        });
+      });
+    }
+</script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
 {% endblock %}

@@ -1,0 +1,7 @@
+You have received a new message from the contact form on your website:
+
+Name: {{ name }}
+Email: {{ email }}
+{% if company %}Company: {{ company }}{% endif %}
+Message:
+{{ message }}
