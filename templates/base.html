@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}24gibby{% endblock %}</title>
+  <meta name="description" content="{% block description %}24gibby — Bass, House & UKG. Milwaukee, WI.{% endblock %}">
+
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% block theme_css %}{% static 'css/theme_void.css' %}{% endblock %}">
+
+  <link rel="canonical" href="{% block canonical_url %}https://www.24gibby.com{% endblock %}">
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="{% block og_title %}24gibby{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Bass, House & UKG. Milwaukee, WI.{% endblock %}">
+  <meta property="og:image"       content="{% block og_image %}{% static 'images/og-image.png' %}{% endblock %}">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url"         content="{% block og_url %}https://www.24gibby.com{% endblock %}">
+  <meta property="og:site_name"   content="24gibby">
+  <meta property="og:type"        content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="{% block twitter_title %}24gibby{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Bass, House & UKG. Milwaukee, WI.{% endblock %}">
+  <meta name="twitter:image"       content="{% block twitter_image %}{% static 'images/og-image.png' %}{% endblock %}">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {% block ld_json %}
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "24gibby",
+    "url": "https://www.24gibby.com",
+    "genre": ["Bass", "House", "UK Garage"],
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Milwaukee",
+        "addressRegion": "WI",
+        "addressCountry": "US"
+      }
+    },
+    "sameAs": [
+      "https://open.spotify.com/artist/REPLACE_ME",
+      "https://www.instagram.com/REPLACE_ME",
+      "https://www.tiktok.com/@REPLACE_ME",
+      "https://soundcloud.com/REPLACE_ME"
+    ]
+  }
+  {% endblock %}
+  </script>
+
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+
+  <!-- ==================== NAV ==================== -->
+  <header class="site-nav">
+    <a href="{% url 'home' %}" class="nav-wordmark">24gibby</a>
+
+    <!-- Hamburger for mobile -->
+    <button class="nav-hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="{% url 'home' %}"    class="{% block nav_home %}{% endblock %}">Home</a>
+      <a href="{% url 'shows' %}"   class="{% block nav_shows %}{% endblock %}">Shows</a>
+      <a href="{% url 'merch' %}"   class="{% block nav_merch %}{% endblock %}">Merch</a>
+      <a href="{% url 'contact' %}" class="{% block nav_contact %}{% endblock %}">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ==================== PAGE CONTENT ==================== -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="footer-left">
+      <span class="footer-wordmark">24gibby</span>
+      <span class="footer-copy">© {% now "Y" %} 24gibby. All rights reserved.</span>
+    </div>
+
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/REPLACE_ME" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fab fa-instagram"></i> IG
+      </a>
+      <a href="https://www.tiktok.com/@REPLACE_ME" target="_blank" rel="noopener" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i> TK
+      </a>
+      <a href="https://open.spotify.com/artist/REPLACE_ME" target="_blank" rel="noopener" aria-label="Spotify">
+        <i class="fab fa-spotify"></i> SP
+      </a>
+      <a href="https://soundcloud.com/REPLACE_ME" target="_blank" rel="noopener" aria-label="SoundCloud">
+        <i class="fab fa-soundcloud"></i> SC
+      </a>
+    </div>
+  </footer>
+
+  <!-- ==================== NAV TOGGLE SCRIPT ==================== -->
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    // Close menu on link click (mobile)
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+  </script>
+
+  <script src="{% static 'js/animations.js' %}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

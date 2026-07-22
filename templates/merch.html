@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Merch — 24gibby{% endblock %}
+{% block description %}Official 24gibby merchandise. Tees, hats, vinyl and more.{% endblock %}
+{% block nav_merch %}active{% endblock %}
+
+{% block content %}
+<div class="merch-page">
+
+  <div class="page-hero" data-reveal>
+    <div class="section-eyebrow" style="color: rgba(255,255,255,0.3);">Official Store</div>
+    <h1 class="page-hero-title">Merch</h1>
+  </div>
+
+  <div class="merch-coming-soon content-wrap" data-reveal data-reveal-delay="80">
+    <p class="merch-coming-soon-text">Merch is coming soon. Check back shortly.</p>
+  </div>
+
+  <!--
+  <div class="merch-grid">
+    {% for item in merch_items %}
+    <div class="merch-card" data-reveal data-reveal="scale" data-reveal-delay="{{ forloop.counter0 }}">
+      <div class="merch-card-img">
+        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+      </div>
+      <div class="merch-card-info">
+        <div class="merch-card-name">{{ item.name }}</div>
+        <div class="merch-card-price">${{ item.price }}</div>
+      </div>
+    </div>
+    {% empty %}
+    <p class="shows-empty">No merch listed yet — check back soon.</p>
+    {% endfor %}
+  </div>
+  -->
+
+</div>
+{% endblock %}

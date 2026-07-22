@@ -1,0 +1,311 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% endblock %}">
+
+  <link rel="shortcut icon" href="{% static 'images/logo.ico' %}" type="image/x-icon">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/theme_void.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="canonical" href="{% block canonical_url %}{% endblock %}">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{% block og_title %}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{% static 'images/og-image.png' %}{% endblock %}">
+  <meta property="og:image:width" content="2500">
+  <meta property="og:image:height" content="1330">
+  <meta property="og:url" content="{% block og_url %}{% endblock %}">
+  <meta property="og:site_name" content="{% block og_site_name %}{% endblock %}">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{% static 'images/og-image.png' %}{% endblock %}">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+    {% block ld_json %}
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Shae Kuhnke",
+      "url": "https://www.shaekuhnke.com",
+      "image": "https://www.shaekuhnke.com/static/images/avatar.png",
+      "jobTitle": "Full Stack Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/shae-kuhnke-76781b2b5",
+        "https://github.com/sjkuhnke",
+        "https://www.instagram.com/sjkuhnke_/"
+      ]
+    }
+    {% endblock %}
+  </script>
+
+  {% block extra_head %}{% endblock %}
+  <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
+</head>
+
+<body>
+<!--
+<div style="padding: 1rem 0 0.5rem;">
+  <div class="theme-picker">
+    <button class="theme-btn active" id="btn-a" onclick="switchTheme('a')">A — Void</button>
+    <button class="theme-btn" id="btn-b" onclick="switchTheme('b')">B — Grain</button>
+    <button class="theme-btn" id="btn-c" onclick="switchTheme('c')">C — Grid</button>
+  </div>
+</div>
+-->
+
+<div class="preview-frame">
+  <!-- THEME A: VOID -->
+  <div class="theme-a-wrap active" id="theme-a">
+    <nav class="ta-nav">
+      <div class="ta-wordmark">24gibby</div>
+      <div class="ta-nav-links">
+        <a href="#" class="active-link">Home</a>
+        <a href="#">Shows</a>
+        <a href="#">Merch</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+    <div class="ta-hero">
+      <div class="ta-hero-bg"></div>
+      <div class="ta-eyebrow">Milwaukee, WI - Underground</div>
+      <div class="ta-headline">24gibby</div>
+      <div class="ta-subline">Bass · House · UKG</div>
+      <div class="ta-cta-row">
+        <button class="ta-cta-primary">Latest Release</button>
+        <button class="ta-cta-ghost">Book a Show</button>
+      </div>
+    </div>
+    <div class="ta-spotify-block">
+      <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0NUqi0ps17YpLUC3kgsZq0?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+    <div class="ta-shows-section">
+      <div class="ta-section-label">Upcoming Shows</div>
+      <div class="ta-show-row">
+        <div class="ta-show-date">Jul 12</div>
+        <div class="ta-show-venue">Cactus Club</div>
+        <div class="ta-show-city">Milwaukee, WI</div>
+        <button class="ta-ticket-btn">Tickets</button>
+      </div>
+      <div class="ta-show-row">
+        <div class="ta-show-date">Jul 26</div>
+        <div class="ta-show-venue">Empty Bottle</div>
+        <div class="ta-show-city">Chicago, IL</div>
+        <button class="ta-ticket-btn">Tickets</button>
+      </div>
+      <div class="ta-show-row">
+        <div class="ta-show-date">Aug 03</div>
+        <div class="ta-show-venue">X-Ray Arcade</div>
+        <div class="ta-show-city">Norridge, IL</div>
+        <button class="ta-ticket-btn">Tickets</button>
+      </div>
+    </div>
+    <div class="ta-footer">
+      <div class="ta-footer-copy">© 2026 24gibby. All rights reserved.</div>
+      <div class="ta-socials">
+        <a href="#">IG</a>
+        <a href="#">TK</a>
+        <a href="#">SP</a>
+        <a href="#">SC</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- THEME B: GRAIN -->
+  <div class="theme-b-wrap" id="theme-b">
+    <nav class="tb-nav">
+      <div class="tb-wordmark">24gibby</div>
+      <div class="tb-nav-links">
+        <a href="#" class="active-link">About</a>
+        <a href="#">Shows</a>
+        <a href="#">Merch</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+    <div class="tb-hero">
+      <div class="tb-hero-left">
+        <div>
+          <div class="tb-tag">Milwaukee, WI</div>
+          <div class="tb-headline"><em>Feel</em><br>the<br>sound.</div>
+        </div>
+        <div>
+          <div class="tb-bio">Underground house artist blending raw beats with live performance energy. Catch a show before the rest of the world catches on.</div>
+          <button class="tb-cta">Listen Now →</button>
+        </div>
+      </div>
+      <div class="tb-hero-right">
+        <div class="tb-album-art">Cover Art</div>
+        <div class="tb-album-label">Latest EP — 2026</div>
+      </div>
+    </div>
+    <div class="tb-strip">
+      <div class="tb-strip-label">On Tour</div>
+      <div class="tb-strip-shows">
+        <div class="tb-strip-show"><strong>Jul 12</strong> — Cactus Club, MKE</div>
+        <div class="tb-strip-show"><strong>Jul 26</strong> — Empty Bottle, CHI</div>
+        <div class="tb-strip-show"><strong>Aug 03</strong> — X-Ray Arcade</div>
+      </div>
+      <div class="tb-strip-cta">All Dates →</div>
+    </div>
+    <div class="tb-merch-section">
+      <div class="tb-section-head">
+        <div class="tb-section-title">Merch</div>
+        <a href="#" class="tb-section-link">Shop All →</a>
+      </div>
+      <div class="tb-merch-grid">
+        <div class="tb-merch-card">
+          <div class="tb-merch-img v1">👕</div>
+          <div class="tb-merch-info">
+            <div class="tb-merch-name">Black Tee</div>
+            <div class="tb-merch-price">$32</div>
+          </div>
+        </div>
+        <div class="tb-merch-card">
+          <div class="tb-merch-img v2">🧢</div>
+          <div class="tb-merch-info">
+            <div class="tb-merch-name">Logo Cap</div>
+            <div class="tb-merch-price">$28</div>
+          </div>
+        </div>
+        <div class="tb-merch-card">
+          <div class="tb-merch-img v3">💿</div>
+          <div class="tb-merch-info">
+            <div class="tb-merch-name">EP Vinyl</div>
+            <div class="tb-merch-price">$24</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tb-footer">
+      <div class="tb-footer-copy">© 2026 24gibby</div>
+      <div class="tb-footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Spotify</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- THEME C: GRID -->
+  <div class="theme-c-wrap" id="theme-c">
+    <nav class="tc-nav">
+      <div class="tc-nav-left">
+        <a href="#" class="active-link">Home</a>
+        <a href="#">Shows</a>
+      </div>
+      <div class="tc-wordmark">ARTIST</div>
+      <div class="tc-nav-right">
+        <a href="#">Merch</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+    <div class="tc-grid-hero">
+      <div class="tc-hero-left">
+        <div>
+          <div class="tc-edition">Milwaukee Underground · Est. 2024</div>
+          <div class="tc-headline">ARTIST<br><span class="accent">NAME</span><br>MUSIC</div>
+        </div>
+        <div style="font-size:11px;color:rgba(0,0,0,0.3);font-weight:700;letter-spacing:0.06em;">Electronic · Experimental</div>
+      </div>
+      <div class="tc-hero-right">
+        <div>
+          <div class="tc-latest-label">Latest Track</div>
+          <div class="tc-sp-block">
+            <div class="tc-sp-thumb">♪</div>
+            <div class="tc-sp-info">
+              <div class="tc-sp-track">Track Name</div>
+              <div class="tc-sp-sub">Single · 2026</div>
+            </div>
+            <div class="tc-sp-play">▶</div>
+          </div>
+        </div>
+        <div>
+          <div class="tc-bio-tag">About</div>
+          <div class="tc-bio-text">Underground Milwaukee electronic artist. Raw production, live energy, relentless output.</div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-bottom-row" style="border-top:1.5px solid #111;">
+      <div class="tc-cell">
+        <div class="tc-cell-label">
+          <span>Upcoming Shows</span>
+          <a href="#">All →</a>
+        </div>
+        <div class="tc-show-item">
+          <div class="tc-show-name">Cactus Club</div>
+          <div class="tc-show-detail">Jul 12 · Milwaukee, WI</div>
+        </div>
+        <div class="tc-show-item">
+          <div class="tc-show-name">Empty Bottle</div>
+          <div class="tc-show-detail">Jul 26 · Chicago, IL</div>
+        </div>
+        <div class="tc-show-item">
+          <div class="tc-show-name">X-Ray Arcade</div>
+          <div class="tc-show-detail">Aug 03 · Norridge, IL</div>
+        </div>
+      </div>
+      <div class="tc-cell">
+        <div class="tc-cell-label">
+          <span>Merch</span>
+          <a href="#">Shop →</a>
+        </div>
+        <div class="tc-merch-mini">
+          <div class="tc-merch-box v1">👕</div>
+          <div class="tc-merch-box v2">🧢</div>
+          <div class="tc-merch-box v3" style="border-color:#111;">💿</div>
+        </div>
+      </div>
+      <div class="tc-cell">
+        <div class="tc-cell-label"><span>Contact</span></div>
+        <div class="tc-contact-form">
+            <label>
+                <input class="tc-input" placeholder="Your name" type="text" />
+            </label>
+            <label>
+                <input class="tc-input" placeholder="Email" type="email" />
+            </label>
+            <button class="tc-submit">Send Message</button>
+        </div>
+      </div>
+    </div>
+    <div class="tc-footer">
+      <div class="tc-footer-copy">© 2026 Artist Name</div>
+      <div class="tc-footer-socials">
+        <a href="#">IG</a>
+        <a href="#">TK</a>
+        <a href="#">SP</a>
+        <a href="#">SC</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function switchTheme(t) {
+  ['a','b','c'].forEach(x => {
+    document.getElementById('theme-' + x).classList.toggle('active', x === t);
+    document.getElementById('btn-' + x).classList.toggle('active', x === t);
+  });
+}
+</script>
+</body>

@@ -1,0 +1,202 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---- NAV ---- */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.nav-wordmark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+/* Hamburger - hidden on desktop */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 110;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+}
+
+/* ---- MAIN ---- */
+main {
+  flex: 1;
+  padding-top: 0;
+}
+
+/* ---- FOOTER ---- */
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.footer-wordmark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+}
+
+.footer-copy {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-socials a {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer-socials a:hover {
+  opacity: 0.5;
+}
+
+/* ---- REUSABLE PAGE SECTIONS ---- */
+
+/* Section label eyebrow */
+.section-eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Inner page hero */
+.page-hero {
+  padding: 140px 40px 60px;
+}
+
+.page-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 10vw, 120px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 768px) {
+  .site-nav {
+    padding: 16px 20px;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    z-index: 100;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    letter-spacing: 0.2em;
+  }
+
+  .site-footer {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-hero {
+    padding: 80px 20px 40px;
+  }
+
+  .content-wrap {
+    padding: 0 20px;
+  }
+}

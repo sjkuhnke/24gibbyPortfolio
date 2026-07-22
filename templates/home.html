@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}24gibby - Bass, House & UKG{% endblock %}
+{% block description %}24gibby is an underground electronic artist from Milwaukee, WI. Bass, house, and UK garage with raw production and live energy.{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+
+<!-- HERO (collage + headline) -->
+<section class="home-hero">
+
+  <div class="hero-collage">
+
+    <div class="collage-photo p1">
+      {# PHOTO 1 - live set wide shot #}
+      <img src="{% static 'images/image-1.jpg' %}" alt="24gibby live">
+    </div>
+
+    <div class="collage-photo p2">
+      {# PHOTO 2 - close-up / studio candid #}
+      <img src="{% static 'images/image-2.jpg' %}" alt="24gibby">
+    </div>
+
+    <div class="collage-photo p3">
+      {# PHOTO 3 - crowd at a show #}
+      <img src="{% static 'images/image-3.jpg' %}" alt="24gibby performance">
+    </div>
+
+    <div class="collage-photo p4">
+      {# PHOTO 4 - decks / gear #}
+      <img src="{% static 'images/image-4.jpg' %}" alt="24gibby in the studio">
+    </div>
+
+    <div class="collage-photo p5">
+      {# PHOTO 5 - portrait #}
+      <img src="{% static 'images/image-5.jpg' %}" alt="24gibby">
+    </div>
+
+    <div class="collage-photo p6">
+      {# PHOTO 6 - venue exterior / promo #}
+      <img src="{% static 'images/placeholder-6.jpg' %}" alt="24gibby">
+    </div>
+
+    <div class="collage-photo p7">
+      {# PHOTO 7 - another live shot #}
+      <img src="{% static 'images/placeholder-7.jpg' %}" alt="24gibby live">
+    </div>
+
+    <div class="collage-photo p8">
+      {# PHOTO 8 - behind the scenes #}
+      <img src="{% static 'images/placeholder-8.jpg' %}" alt="24gibby">
+    </div>
+      
+    <div class="hero-collage-vignette"></div>
+  </div>
+    
+  <div class="hero-glow"></div>
+    
+  <div class="hero-text">
+    <div class="hero-eyebrow">Milwaukee, WI - Underground</div>
+
+    <h1 class="hero-headline">
+      <span class="hl-name">24gibby</span>
+      <!--<span class="hl-outline">Music</span>-->
+    </h1>
+
+    <div class="hero-sub">
+      <span class="hero-genre">Bass</span>
+      <span class="hero-genre-dot"></span>
+      <span class="hero-genre">House</span>
+      <span class="hero-genre-dot"></span>
+      <span class="hero-genre">UKG</span>
+    </div>
+
+    <div class="hero-cta-row">
+      <a href="https://open.spotify.com/artist/REPLACE_ME" target="_blank" rel="noopener" class="btn-primary">
+        Latest Release
+      </a>
+      <a href="{% url 'contact' %}" class="btn-ghost">
+        Book a Show
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- SHOWS TICKER STRIP -->
+<div class="home-ticker" data-reveal>
+  <span class="ticker-label">On Tour</span>
+  <span class="ticker-dot"></span>
+  <div class="ticker-scroll">
+    {% for show in upcoming_shows|slice:":5" %}
+      <span class="ticker-item"><strong>{{ show.date|date:"M d" }}</strong> - {{ show.venue }}, {{ show.city }}</span>
+    {% empty %}
+      <span class="ticker-item">More dates coming soon</span>
+    {% endfor %}
+    {% if upcoming_shows %}
+      <span class="ticker-item ticker-item-soon">More dates coming soon</span>
+    {% endif %}
+  </div>
+  <a href="{% url 'shows' %}" class="ticker-cta">All Dates &rarr;</a>
+</div>
+
+<!-- ==================== MUSIC / SPOTIFY ==================== -->
+<section class="home-music">
+  <div class="music-info">
+    <div class="music-label" data-reveal>Latest Music</div>
+    <h2 class="music-headline" data-reveal data-reveal-delay="80">Hear<br>the<br>sound.</h2>
+    <p class="music-body" data-reveal data-reveal-delay="160">
+      Raw production. Live energy. Underground Milwaukee bass music
+      built for the dancefloor and the headphones equally.
+      New material dropping constantly - follow on Spotify to stay current.
+    </p>
+  </div>
+
+  <div class="spotify-embed-wrap" data-reveal data-reveal="right">
+    <iframe
+      style="border-radius:6px"
+      src="https://open.spotify.com/embed/track/0NUqi0ps17YpLUC3kgsZq0?utm_source=generator&theme=0"
+      width="100%"
+      height="352"
+      frameborder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"
+      title="24gibby on Spotify">
+    </iframe>
+  </div>
+</section>
+
+<!-- SHOWS PREVIEW -->
+<section class="home-shows">
+  <div class="shows-header" data-reveal>
+    <h2>Shows</h2>
+    <a href="{% url 'shows' %}">All Dates &rarr;</a>
+  </div>
+
+  {% for show in upcoming_shows|slice:":4" %}
+  <div class="show-row" data-reveal data-reveal-delay="{{ forloop.counter0|add:1 }}">
+    <div class="show-date">{{ show.date|date:"M d" }}</div>
+    <div class="show-venue">{{ show.venue }}</div>
+    <div class="show-city">{{ show.city }}, {{ show.state }}</div>
+    {% if show.ticket_url %}
+    <a href="{{ show.ticket_url }}" target="_blank" rel="noopener" class="show-ticket-btn">Tickets</a>
+    {% else %}
+    <span class="show-ticket-btn show-ticket-btn-disabled">TBA</span>
+    {% endif %}
+  </div>
+  {% empty %}
+  <p class="shows-empty">No shows announced yet — check back soon.</p>
+  {% endfor %}
+
+  <div class="show-row show-row-soon" data-reveal>
+    <div class="show-venue show-venue-soon">More shows coming soon</div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="home-video">
+  <div class="video-header" data-reveal>
+    <div class="section-eyebrow" style="color: var(--fg-dim);">Watch</div>
+    <h2 class="video-headline">Live<br>&amp; Direct.</h2>
+  </div>
+
+  <div class="video-embed-wrap" data-reveal data-reveal="scale">
+    <div class="video-embed-frame">
+      <iframe
+        src="https://www.youtube.com/embed/REPLACE_ME"
+        title="24gibby video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="home-about">
+  <div class="about-tag" data-reveal data-reveal="left">About<br>24gibby</div>
+  <div data-reveal data-reveal-delay="120">
+    <p class="about-body">
+      <strong>24gibby</strong> is an underground electronic artist from Milwaukee, Wisconsin -
+      producing and performing bass, house, and UK garage type shit.
+      Self-produced absolute bangers.
+      <br><br>
+      Catch a show before he touches you.
+    </p>
+  </div>
+</section>
+
+{% endblock %}

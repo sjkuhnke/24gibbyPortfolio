@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact — 24gibby{% endblock %}
+{% block description %}Book 24gibby for a show or reach out for press/features.{% endblock %}
+{% block nav_contact %}active{% endblock %}
+
+{% block content %}
+<div class="contact-page">
+
+  <div class="page-hero" data-reveal>
+    <div class="section-eyebrow" style="color: rgba(255,255,255,0.3);">Get in Touch</div>
+    <h1 class="page-hero-title">Contact</h1>
+  </div>
+
+  <div class="contact-wrap content-wrap">
+
+    <!-- Left: info + socials -->
+    <div data-reveal data-reveal="left">
+      <div class="contact-info-label">Bookings & Press</div>
+      <p class="contact-info-text">
+        For show bookings, press enquiries, or anything else -
+        use the form or reach out directly on socials.
+      </p>
+
+      <div class="contact-info-label">Follow</div>
+      <div class="contact-socials">
+        <a href="https://www.instagram.com/REPLACE_ME" target="_blank" rel="noopener" class="contact-social-link">
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://www.tiktok.com/@REPLACE_ME" target="_blank" rel="noopener" class="contact-social-link">
+          <i class="fab fa-tiktok"></i> TikTok
+        </a>
+        <a href="https://open.spotify.com/artist/REPLACE_ME" target="_blank" rel="noopener" class="contact-social-link">
+          <i class="fab fa-spotify"></i> Spotify
+        </a>
+        <a href="https://soundcloud.com/REPLACE_ME" target="_blank" rel="noopener" class="contact-social-link">
+          <i class="fab fa-soundcloud"></i> SoundCloud
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: contact form -->
+    <div data-reveal data-reveal="right" data-reveal-delay="120">
+      <!--
+        Wire this form up to a Django view with a POST handler.
+        Don't forget {% csrf_token %}.
+        Optional: add reCAPTCHA like your portfolio site if spam becomes an issue.
+      -->
+      <form class="contact-form" method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subject">Subject</label>
+          <input class="form-input" type="text" id="subject" name="subject" placeholder="Booking, press, or just saying hi">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="What's on your mind?" required></textarea>
+        </div>
+
+        {% if messages %}
+          {% for message in messages %}
+            <p style="font-size:12px; color: {% if message.tags == 'success' %}#1DB954{% else %}#e24b2b{% endif %}; letter-spacing:0.06em;">
+              {{ message }}
+            </p>
+          {% endfor %}
+        {% endif %}
+
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

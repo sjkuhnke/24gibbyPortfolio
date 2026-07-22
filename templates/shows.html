@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shows — 24gibby{% endblock %}
+{% block description %}Upcoming 24gibby shows and tour dates. Bass, House & UKG live in Milwaukee and beyond.{% endblock %}
+{% block nav_shows %}active{% endblock %}
+
+{% block content %}
+<div class="shows-page">
+
+  <div class="page-hero" data-reveal>
+    <div class="section-eyebrow" style="color: rgba(255,255,255,0.3);">Tour Dates</div>
+    <h1 class="page-hero-title">
+      UP<span>COMING</span><br>SHOWS
+    </h1>
+  </div>
+
+  <div class="shows-list">
+
+    {% for month, shows in shows_by_month.items %}
+    <div class="shows-month-group" data-reveal>
+      <div class="shows-month">{{ month }}</div>
+      {% for show in shows %}
+      <div class="show-row" data-reveal data-reveal-delay="{{ forloop.counter0 }}">
+        <div class="show-date">{{ show.date|date:"M d" }}</div>
+        <div class="show-venue">{{ show.venue }}</div>
+        <div class="show-city">{{ show.city }}, {{ show.state }}</div>
+        {% if show.ticket_url %}
+        <a href="{{ show.ticket_url }}" target="_blank" rel="noopener" class="show-ticket-btn">Tickets</a>
+        {% else %}
+        <span class="show-ticket-btn show-ticket-btn-disabled">TBA</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% empty %}
+    <p class="shows-empty">No upcoming shows right now — check back soon.</p>
+    {% endfor %}
+
+    <div class="shows-month-group shows-coming-soon" data-reveal>
+      <div class="shows-month">More Dates</div>
+      <p class="shows-empty shows-empty-inline">More shows coming soon — stay tuned.</p>
+    </div>
+
+    {% if past_shows %}
+    <div class="shows-month-group shows-past-group" data-reveal>
+      <div class="shows-month">Past Shows</div>
+      {% for show in past_shows %}
+      <div class="show-row show-row-past" data-reveal data-reveal-delay="{{ forloop.counter0 }}">
+        <div class="show-date">{{ show.date|date:"M d, Y" }}</div>
+        <div class="show-venue">{{ show.venue }}</div>
+        <div class="show-city">{{ show.city }}, {{ show.state }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}
