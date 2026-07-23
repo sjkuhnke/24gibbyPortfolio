@@ -79,7 +79,7 @@ def contact(request):
             email_subject,
             email_body,
             settings.DEFAULT_FROM_EMAIL,
-            ['gstockoption4@gmail.com']
+            ['management@24gibby.com']
         )
 
         try:
